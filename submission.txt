@@ -1,0 +1,4 @@
+Name: Ibrahim Mackey
+Live URL: https://codd.cs.gsu.edu/~imackey1/web/hw2/index.html
+GitHub: https://github.com/imackey1/[your-hw2-repo-name]
+Notes: Homework 2 (TMNT movie review page). Undergraduate Layout Lab: CSS Grid builds the 800px content frame (flexible main column + 250px overview column, collapsing at 700px); Flexbox is used for the rating bar and the reviewer lines.

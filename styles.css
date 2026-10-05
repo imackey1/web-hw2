@@ -1,0 +1,211 @@
+/*
+  Name:    Ibrahim Mackey
+  Section: 002
+  Assignment 2 - Style sheet for index.html (TMNT movie review page).
+
+  Contents:
+    1. Page, banner and heading
+    2. Content frame (CSS Grid)
+    3. Rating bar (Flexbox)
+    4. Reviews (two columns, Flexbox reviewer line)
+    5. General Overview sidebar and counter bar
+    6. Fixed validator links
+    7. Mobile layout (700px and below)
+
+  Layout decisions:
+    - Grid builds the 800px content frame. Named areas give a flexible main column and a
+      250px overview column, with the counter bar spanning both columns underneath.
+      Grid is the right tool because the two columns and the bottom bar need to line up
+      in both directions at once.
+    - Flexbox lays out two repeated components that only need one-dimensional alignment:
+      the rating bar (image, score and total on a shared baseline) and the reviewer line
+      (icon beside the name and publication). Both wrap or shrink without spacer elements.
+    - At 700px and below the frame collapses to a single column so the page needs no
+      horizontal scrolling on a phone.
+*/
+
+/* ---------- 1. Page, banner and heading ---------- */
+
+body {
+  margin: 0;
+  padding: 0;
+  background: url("images/background.png");
+  font: 8pt Verdana, Tahoma, sans-serif;
+}
+
+#banner {
+  height: 50px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: center;
+  background: url("images/bannerbackground.png") repeat-x;
+}
+
+#banner img {
+  vertical-align: top;
+}
+
+h1 {
+  margin: 24px 0;
+  text-align: center;
+  font: bold 24pt Tahoma, Verdana, sans-serif;
+}
+
+a:focus {
+  outline: 2px solid #000;
+  outline-offset: 2px;
+}
+
+/* ---------- 2. Content frame (Grid) ---------- */
+
+#content {
+  display: grid;
+  grid-template-columns: 1fr 250px;
+  grid-template-areas:
+    "rating   overview"
+    "reviews  overview"
+    "counter  counter";
+  grid-template-rows: auto 1fr auto;
+  width: 800px;
+  max-width: calc(100% - 8px);
+  margin: 0 auto;
+  border: 4px solid gray;
+}
+
+/* ---------- 3. Rating bar (Flexbox) ---------- */
+
+#rating {
+  grid-area: rating;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  background: url("images/rottenbackground.png") repeat-x;
+  color: white;
+}
+
+#score {
+  margin: 0 10px;
+  font: bold 48pt Tahoma, Verdana, sans-serif;
+  color: red;
+}
+
+/* ---------- 4. Reviews ---------- */
+
+#reviews {
+  grid-area: reviews;
+  display: flex;
+  align-items: flex-start;
+  padding-top: 12px;
+}
+
+.column {
+  width: 47%;
+  margin-left: 2%;
+}
+
+.review {
+  margin-bottom: 35px;
+}
+
+blockquote {
+  overflow: hidden;
+  margin: 0;
+  padding: 8px;
+  border: 2px solid gray;
+  background: #e1d697;
+  font-weight: bold;
+}
+
+blockquote img {
+  float: left;
+  margin-right: 5px;
+}
+
+.reviewer {
+  display: flex;
+  align-items: center;
+  margin: 8px 0 0 5px;
+}
+
+.reviewer .name,
+.reviewer em {
+  display: block;
+}
+
+/* ---------- 5. General Overview and counter ---------- */
+
+#overview {
+  grid-area: overview;
+  background: #a2b964;
+  font: 8pt Arial, sans-serif;
+}
+
+#overview img {
+  display: block;
+  max-width: 100%;
+}
+
+#overview dl {
+  margin: 0;
+  padding: 10px;
+}
+
+#overview dt {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+#counter {
+  grid-area: counter;
+  padding: 5px;
+  background: #a2b964;
+  text-align: center;
+}
+
+/* ---------- 6. Fixed validator links ---------- */
+
+#validators {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+#validators img {
+  display: block;
+  border: 0;
+}
+
+/* ---------- 7. Mobile layout ---------- */
+
+@media (max-width: 700px) {
+  #content {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "rating"
+      "reviews"
+      "overview"
+      "counter";
+    grid-template-rows: auto;
+  }
+
+  #reviews {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .column {
+    width: auto;
+    margin: 0 2%;
+  }
+
+  #score {
+  margin: 0 10px;
+    font-size: 36pt;
+  }
+
+  h1 {
+    font-size: 20pt;
+  }
+}
